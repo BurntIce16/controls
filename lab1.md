@@ -1,6 +1,6 @@
 # Lab 1
 
-## Distrobution of work
+## Distribution of work
 
 | Name  | Work(%) |
 |-------|---------|
