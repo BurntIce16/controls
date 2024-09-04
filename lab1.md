@@ -10,7 +10,7 @@
 
 ## Lab topic
 
->Someone else do this section please
+In this lab we cover the basics of control related functions and operations in MATLAB and using ODE’s to model systems and solve them. We then looked into using Simulink to model a basic moving car system and simulate inaccurate sensors with signal generators and various other logic blocks.
 
 ## MATLAB Tutorial
 
@@ -98,4 +98,4 @@ title('Solution of y'''' + 7y'' + 10y = 0')
 
 ## Conclusion
 
->Someone else do this section please
+All in all, MATLAB and Simulink are powerful tools to simplify system simulation and calculation. In MATLAB we were able to mathematically summarize a classic spring-mass-dampener system with differential equations and their solutions, and coherently visualize them. In Simulink we were able to emulate the relationship between the gas pedal and the acceleration of the car, as well as simulate a sensor and its real world inaccuracies and visually compare its readings to actual values.
