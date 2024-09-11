@@ -1,0 +1,3 @@
+After analyzing the resulting graphs from our system we conclude that they are not expected and representative of the system. The main point we find an issue with is the cart's displacement concerning time. The cart is a 1kg mass with an additional .1kg mass attached. The force applied on the cart is 1N which has the units kg*m/s^2. Given that our system is slightly over 1kg we would expect to see our cart begin accelerating linearly around 1 second in, however, the cart's displacement remains static until the last few fractions of a second. This leads us to believe that this system has been incorrectly modeled.
+
+
