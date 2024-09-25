@@ -1,45 +1,52 @@
 % Define the system transfer function G(s) = 1/(s^2 + 2s + 5)
 num = 1;
 den = [1 2 5];
+G = tf(num, den);
 
 % Define unit step input s
-s = 0:0.01:14;
+s = 0:0.01:10;
 
 % Create the open-loop transfer function
 G = tf(num, den);
-
-% Define the PID controller gains
-Kp_values = [1, 2];
-Ki_values = [0, 0.1];
-Kd_values = [0, 0.1];
 
 % Create a figure for the plots
 figure;
 hold on;
 
-% Loop over different PID parameters
-for i = 1:length(Kp_values)
-    for j = 1:length(Ki_values)
-        for k = 1:length(Kd_values)
-            Kp = Kp_values(i);
-            Ki = Ki_values(j);
-            Kd = Kd_values(k);
+% Create a legend for the plots
+legendEntries = {};
+% Create a list to store the PID systems
+sys = [];
 
-            % Create the PID controller transfer function C(s) = Kp + Ki/s + Kd*s
-            C = pid(Kp, Ki, Kd);
+% Plot the step response of the system with different PID parameters
+[sys, legendEntries] = plotPidSystem(1, 0, 0, G, s, legendEntries);
+[sys, legendEntries] = plotPidSystem(1, 0.1, 0.125, G, s, legendEntries);
+[sys, legendEntries] = plotPidSystem(1, 0, 0.75, G, s, legendEntries);
+[sys, legendEntries] = plotPidSystem(1, 0.1, 0.45, G, s, legendEntries);
 
-            % Create Closed-loop system with the PID controller
-            sys = feedback(G, C);
 
-            % Simulate Step response of the closed-loop system
-            step(sys, s);
+% Function to plot the step response of the system with a PID controller
+function [sys, legendEntries] = plotPidSystem(Kp, Ki, Kd, G, s, legendEntries)
+    % Create the PID controller transfer function C(s) = Kp + Ki/s + Kd*s
+    C = pid(Kp, Ki, Kd);
 
-            % Add a legend entry for the current PID parameters
-            legendEntries{i, j, k} = ['Kp = ' num2str(Kp) ', Ki = ' num2str(Ki) ', Kd = ' num2str(Kd)];
-        end
-    end
+    % Create Closed-loop system with the PID controller
+    sys = feedback(G, C);
+
+    % Simulate Step response of the closed-loop system
+    step(sys, s);
+
+
+    disp("Kp = " + Kp + ", Ki = " + Ki + ", Kd = " + Kd);
+
+    disp(stepinfo(sys));
+
+    legendEntries{end+1} = ['Kp = ' num2str(Kp) ', Ki = ' num2str(Ki) ', Kd = ' num2str(Kd)];
+
+    % Add a legend entry for the current PID parameters
+    legend(legendEntries);
 end
 
-% Add the legend to the plot
-legend(legendEntries(:));
+% Add a legend to the plot
+legend(legendEntries);
 hold off;
